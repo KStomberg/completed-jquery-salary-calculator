@@ -19,8 +19,17 @@ function submitButton() {
       jobTitle: jobTitleInput,
       annualSalary: annualSalaryInput,
     };
-    employees.push(employee);
+    employees.push(employee); 
     console.log(employees);
+    $('.employeeList').append(
+        `<li>` +
+        employee.firstName +
+        employee.lastName +
+        employee.idNumber +
+        employee.jobTitle +
+        employee.annualSalary +
+        `</li>`
+        );
   });
 }
 
