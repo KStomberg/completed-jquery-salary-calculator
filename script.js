@@ -5,6 +5,8 @@ $(document).ready(function () {
 
 let employees = [];
 
+let totalYearlyCost = 0;
+
 function submitButton() {
   $("#submitButton").on("click", function () {
     let firstNameInput = $("#firstName").val();
@@ -22,22 +24,27 @@ function submitButton() {
     employees.push(employee); 
     console.log(employees);
     $('.employeeList').append(
-        `<li>` +
+        `<tr> <td>` +
         employee.firstName +
+        `</td> <td>` +
         employee.lastName +
+        `</td> <td>` +
         employee.idNumber +
+        `</td> <td>` +
         employee.jobTitle +
+        `</td> <td class="employeeSalary">` +
         employee.annualSalary +
-        `</li>`
+        `</td> </tr>`
         );
+    salaryCalculator();
   });
 }
-
-/*
-    let employee = {
-        firstName: firstNameInput,
-        lastName: lastNameInput,
-        idNumber: idNumberInput,
-        jobTitle: jobTitleInput,
-        annualSalary: annualSalaryInput
-    } */
+let salaryCombiner;
+function salaryCalculator() {
+    for (const employee of employees) {
+        salaryCombiner + Number(employee.annualSalary);
+        totalYearlyCost = salaryCombiner;
+    }
+    return totalYearlyCost
+    salaryCombiner = 0;
+}
