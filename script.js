@@ -49,8 +49,8 @@ function salaryCalculator() {
     totalYearlyCost = salaryCombiner;
     console.log(salaryCombiner);
   } // end for of
-  salaryCombiner = 0;
-  if (totalYearlyCost > 20000) {
+  salaryCombiner = 0; // after the for of, 'empty' it so it can be used again
+  if (totalYearlyCost > 20000) { // if over 20000, turn red, if removed below 20000, make white
     $('#totalSalary').html(
       `Total cost of all employee salaries:` + totalYearlyCost
     );
@@ -59,6 +59,7 @@ function salaryCalculator() {
     $('#totalSalary').html(
       `Total cost of all employee salaries:` + totalYearlyCost
     );
+    $('#totalSalary').css(`background-color`, `white`);
   }
   return totalYearlyCost;
 }
@@ -66,7 +67,7 @@ function testCompare(test) {
   if (test === employees.length) return test;
 }
 
-function deleteRow() {
+function deleteRow() {// for some reason this function splices more than one thing at a time, I would love a explanation as to what I did wrong here.
     let test = $(this).closest('tr').find('employeeId').text();
     console.log(test);
     let matched = employees.findIndex(function (item) {
@@ -77,9 +78,3 @@ function deleteRow() {
     employees.splice(matched);
     salaryCalculator();
 }
-
-/*function emptyCheck() { // If the length is empty, change the html to 0, I don't like this solution, but I could not figure out a better one!
-  if (employees.length < 1) {
-    $('#totalSalary').html(`Total cost of all employee salaries: 0`);
-  }
-}*/
