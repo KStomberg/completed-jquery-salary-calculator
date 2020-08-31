@@ -38,14 +38,7 @@ function submitButton() {
         `</td> </tr>`
     );
     salaryCalculator();
-    $('.deleteButton').on('click', function () {
-      let test = $(this).closest('tr').find("employeeId").text();
-      let i = employees.findIndex(function (item) {return item.employeeId === test;});
-      employees.splice(i, 1);
-      salaryCalculator();
-      //emptyCheck();
-      $(this).closest('tr').remove();
-    });
+    $('.deleteButton').on('click', deleteRow);
   });
 }
 let salaryCombiner = 0;
@@ -69,6 +62,22 @@ function salaryCalculator() {
   }
   return totalYearlyCost;
 }
+function testCompare(test) {
+  if (test === employees.length) return test;
+}
+
+function deleteRow() {
+    let test = $(this).closest('tr').find('employeeId').text();
+    console.log(test);
+    let matched = employees.findIndex(function (item) {
+      return item.employeeId === testCompare(test);
+    });
+    console.log(matched);
+    $(this).closest('tr').remove();
+    employees.splice(matched);
+    salaryCalculator();
+}
+
 /*function emptyCheck() { // If the length is empty, change the html to 0, I don't like this solution, but I could not figure out a better one!
   if (employees.length < 1) {
     $('#totalSalary').html(`Total cost of all employee salaries: 0`);
