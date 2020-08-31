@@ -3,9 +3,9 @@ $(document).ready(function () {
   submitButton();
 });
 
-let employees = [];
+let employees = []; // List of all employees
 
-let totalYearlyCost = 0;
+let totalYearlyCost = 0; // Total cost of all employee.annualSalary values
 
 function submitButton() {
   $("#submitButton").on("click", function () {
@@ -34,17 +34,39 @@ function submitButton() {
         employee.jobTitle +
         `</td> <td class="employeeSalary">` +
         employee.annualSalary +
+        `</td> <td> <button class="deleteButton">Delete</button>` +
         `</td> </tr>`
         );
     salaryCalculator();
+    $('#totalSalary').html(
+      `Total cost of all employee salaries:` +
+      totalYearlyCost
+    );
+    if (totalYearlyCost > 20000) {
+      $('#totalSalary').html(
+        `Total cost of all employee salaries:` +
+        totalYearlyCost
+      );
+      $('#totalSalary').css(`background-color`, `red`);
+    } else {
+      $('#totalSalary').html(
+        `Total cost of all employee salaries:` +
+        totalYearlyCost
+      );
+    }
+    $('.deleteButton').on('click', function () {
+      $(this).closest('tr').remove();
+    });
   });
 }
-let salaryCombiner;
+let salaryCombiner = 0;
 function salaryCalculator() {
-    for (const employee of employees) {
-        salaryCombiner + Number(employee.annualSalary);
+    for (const employee of employees) { // start for of
+        salaryCombiner = salaryCombiner + Number(employee.annualSalary);
         totalYearlyCost = salaryCombiner;
-    }
-    return totalYearlyCost
+        console.log(salaryCombiner);
+    } // end for of
     salaryCombiner = 0;
-}
+    return totalYearlyCost;
+  }
+    
